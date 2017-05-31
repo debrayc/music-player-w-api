@@ -1,0 +1,28 @@
+header {
+  top: 0;
+  position: static;
+  background-color: darkgray;
+  width: 100%;
+}
+footer {
+  bottom: 0;
+  position: fixed;
+  background-color: darkgray;
+  width: 100%;
+  text-align: center;
+}
+#left {
+  margin: 2%;
+  background-color: royalblue;
+  height: 100%;
+  background-size: 100%;
+
+}
+#left a {
+  color: darkred;
+}
+#right {
+  background-color: white;
+  height: 100%;
+
+}
