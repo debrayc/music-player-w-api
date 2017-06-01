@@ -1,28 +1,42 @@
 header {
   top: 0;
   position: static;
-  background-color: darkgray;
+  background-color: orange;
   width: 100%;
+  padding: .5%;
 }
 footer {
   bottom: 0;
   position: fixed;
-  background-color: darkgray;
+  background-color: orange;
   width: 100%;
   text-align: center;
+  align-content: center;
+  padding: .5%;
+  margin-top: 1%;
 }
 #left {
-  margin: 2%;
-  background-color: royalblue;
-  height: 100%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  background-color: darkblue;
   background-size: 100%;
 
 }
 #left a {
-  color: darkred;
+  color: orange;
 }
 #right {
   background-color: white;
-  height: 100%;
-
+}
+.now-playing {
+  margin-left: 35%;
+  margin-right: 35%;
+  background-color: white;
+  text-align: left;
+}
+.now-playing p {
+  margin-left: 1%;
+}
+.btn .btn-lg {
+  background-color: darkblue;
 }

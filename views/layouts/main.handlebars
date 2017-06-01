@@ -1,20 +1,21 @@
 <head>
   <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 </script>
 <header>
-  <h1>HEADER</h1>
+  <h1>Music Player with API</h1>
 </header>
   <div class="row">
-    <div id="left" class="col-3	col-sm-3	col-md-3	col-lg-3	col-xl-3">
+    <div id="left" class="col-2	col-sm-2	col-md-2	col-lg-2	col-xl-2">
       <h3><a href="/genres">Genres</a><br>
       <a href="/songs">Songs</a><br>
       <a href="/albums">Albums</a><br>
       <a href="/artists">Artists</a><br>
       <a href="/playlists">Playlists</a></h3>
     </div>
-    <div id="right" class="col-9	col-sm-9	col-md-9	col-lg-9	col-xl-9">
+    <div id="right" class="col-10	col-sm-10	col-md-10	col-lg-10	col-xl-10">
       {{{body}}}
 
     </div>
@@ -22,5 +23,18 @@
 
 
 <footer>
-  <p>App Built by DeBray Carpenter</p>
+  <a href="#" class="btn btn-info btn-lg">
+<span class="glyphicon glyphicon-step-backward"></span> Prev </a>
+  <a href="#" class="btn btn-info btn-lg">
+<span class="glyphicon glyphicon-play-circle"></span> Play </a>
+  <a href="#" class="btn btn-info btn-lg">
+<span class="glyphicon glyphicon-pause"></span> Pause </a>
+  <a href="#" class="btn btn-info btn-lg">
+<span class="glyphicon glyphicon-step-forward"></span> Next </a>
+<br></br>
+<h4>Now Playing:</h4>
+<div class="now-playing">
+  <p><b>Title:</b></p>
+  <p><b>Artist:</b></p>
+</div>
 </footer>
