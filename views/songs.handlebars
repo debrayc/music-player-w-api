@@ -1,1 +1,9 @@
 <h1>Songs:</h1>
+{{#each songs}}
+<ul>
+  <h3><li><b>{{title}}</b><br>
+    album id: {{album_id}} track #: {{track_no}}
+    track length = {{length}} seconds
+  </li>
+</ul></h3>
+{{/each}}

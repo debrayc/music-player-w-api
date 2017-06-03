@@ -6,6 +6,7 @@ const pgp = require('pg-promise')();
 const bodyParser = require('body-parser');
 const path = require('path');
 
+const db = require('./database/musicdatabase')
 const router = express.Router()
 // Models
 const Artist = require('./models/artist')
@@ -23,7 +24,7 @@ router.use( (req, res, next) => {
   console.log();
   next()
 })
-
+// Handlebars.registerHelper('artists', '{{{artists}}}')
 
 app.get('/', (req, res) => {
   res.render('index');
@@ -31,25 +32,38 @@ app.get('/', (req, res) => {
 
 
 app.get('/artists', (req, res) => {
-  res.render('artists');
+  db.getAllArtists()
+   .then( artists => {
+    //  console.log(artists);
+     res.render('artists', {artists})
+   })
 })
 
-router.get('/api/artists', (req, res) => {
-  res.send()
+app.get('/api/artists', (req, res, next) => {
+  db.getAllArtists()
+  .then(artists => {
+    res.send(artists)
+  })
 })
 
 app.get('/artists/:artist_id', (req, res) => {
+  db.getSong()
   res.render(':artist_id')
 })
 
-router.get('/api/artists/:artist_id', (req, res) => {
-  res.send()
+app.get('/api/artists/:artist_id', (req, res, next) => {
+  db.getArtist(req.params.id)
+  .then(artist => {
+    res.send(artist)
+  })
 })
 
-
-app.get('/albums', (req,res) => {
-  res.render('albums');
-})
+app.get('/albums', (req, res) => {
+  db.getAllAlbums()
+   .then( albums => {
+     res.render('albums', {albums})
+   })
+ })
 
 router.get('/api/albums', (req, res) => {
   res.send()
@@ -57,43 +71,69 @@ router.get('/api/albums', (req, res) => {
 
 
 app.get('/albums/:album_id', (req,res) => {
-  res.render(':album_id');
+  db.getAlbum(req.params.album_id)
+  res.render(':album_id', {albums});
 })
 
-router.get('/api/albums/:album_id', (req, res) => {
-  res.send()
+app.get('/api/albums/:album_id', (req, res, next) => {
+  db.getAlbum(req.params.album_id)
+  .then( album => {
+    res.send(album)
+  })
+  .catch(next)
 })
 
-app.get('/playlists', (req,res) => {
-  res.render('playlists');
-})
+app.get('/playlists', (req, res) => {
+  db.getAllPlaylists()
+   .then( playlists => {
+     res.render('playlists', {playlists})
+   })
+ })
 
-router.get('/api/playlists', (req, res) => {
-  res.send()
+app.get('/api/playlists', (req, res, next) => {
+  db.getAllPlaylists()
+  .then( playlists => {
+    res.send(playlists)
+  })
 })
 
 app.get('/playlists/:playlist_id', (req, res) => {
+  db.getPlaylist(req.params.playlist_id)
   res.render(':playlist_id');
 })
 
-router.get('/api/playlists/:playlist_id', (req, res) => {
-  res.send()
+app.get('/api/playlists/:playlist_id', (req, res, next) => {
+  db.getPlaylist(req.params.playlist_id)
+  .then( playlists => {
+    res.send(playlist);
+  })
+  .catch(next);
 })
 
-app.get('/songs', (req,res) => {
-  res.render('songs');
-})
+app.get('/songs', (req, res) => {
+  db.getAllSongs()
+   .then( songs => {
+     res.render('songs', {songs})
+   })
+ })
 
-router.get('/api/songs', (req, res) => {
-  res.send()
+app.get('/api/songs', (req, res, next) => {
+  db.getAllSongs()
+  .then(songs => {
+    res.send(songs)
+  })
 })
 
 app.get('/songs/:song_id', (req, res) => {
   res.render(':song_id');
 })
 
-router.get('/api/songs/:song_id', (req, res) => {
-  res.send()
+app.get(`/api/songs/:song_id`, (req, res, next) => {
+  db.getSong(req.params.song_id)
+  .then(songs => {
+    res.send(songs)
+  })
+  .catch(next)
 })
 
 const port = process.env.PORT || 5000;

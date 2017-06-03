@@ -3,14 +3,20 @@ const connectionString = 'postgres://localhost:5432/musicdatabase';
 const db = pgp(connectionString);
 // Songs
 const getAllSongs = () => {
-  return db.any(`SELECT * FROM songs`)
+  let songs = db.any(`SELECT * FROM songs WHERE song_id=1`);
+  return songs;
 }
 
-const deleteSong = (song_id) => {
-  return db.none(`DELETE FROM songs WHERE song_id=${song_id}`)
+const getSong = (song_id) => {
+  let song = db.any(`SELECT * FROM songs WHERE song_id=${song_id}`);
+  return song;
 }
 
-const addSong = (title, artist, length, track_number){
+const deleteSong = (song_id, title) => {
+  return db.none(`DELETE FROM songs WHERE song_id=${song_id} OR title=${title}`)
+}
+
+const addSong = (title, artist, length, track_number) => {
   return db.none(`INSERT INTO songs (title, artist, length, track_number) VALUES (${title}, ${artist}, ${length}, ${track_number})`);
 }
 
@@ -19,7 +25,18 @@ const updateSong = (song_id, title, artist, length, track_number) => {
 }
 // playlists
 const getAllPlaylists = () => {
-  return db.none(`SELECT * FROM playlists`);
+  let playlists = db.any(`SELECT * FROM playlists`);
+  console.log(playlists);
+  return playlists;
+}
+
+const getPlaylist = (playlist_id) => {
+  let playlist = db.any(`SELECT * FROM playlists WHERE playlist_id=${playlist_id}`)
+  return playlist;
+}
+
+const addPlaylist = (playlist_name, songs) => {
+  return db.none(`INSERT INTO playlists (playlist_name, songs) VALUES (playlist_name=${playlist_name}, songs=${playlist_songs})`)
 }
 
 const updatePlaylist = (playlist_id, title, songs) => {
@@ -30,7 +47,13 @@ const deletePlaylist = (id) => {
 }
 // artists
 const getAllArtists = () => {
-  return db.none(`SELECT * FROM artists`)
+  let artists = db.any(`SELECT * FROM artists`);
+  return artists;
+}
+
+const getArtist = artist_id => {
+  let artist = db.any(`SELECT * FROM artists WHERE artist_id=${artist_id}`)
+  return artist;
 }
 
 const addArtist = (name, genre) => {
@@ -46,7 +69,13 @@ const deleteArtist = (artist_id) => {
 }
 // Albums
 const getAllAlbums = () => {
-  return db.none(`SELECT * FROM albums`)
+  let albums = db.any(`SELECT * FROM albums`)
+  return albums;
+}
+
+const getAlbum = (album_id) => {
+  let album = db.any(`SELECT * FROM albums WHERE album_id=${album_id}`)
+  return album;
 }
 
 const addAlbum = (title, artist, year) => {
@@ -76,5 +105,12 @@ module.exports = {
   deletePlaylist,
   deleteSong,
   deleteAlbum,
-  deletePlaylist
+  deletePlaylist,
+  getSong,
+  getPlaylist,
+  getAlbum,
+  getArtist,
+  db,
+  pgp,
+  connectionString
 }
